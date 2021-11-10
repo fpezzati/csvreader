@@ -8,7 +8,7 @@ import csvreader.exception.CsvException;
  * @author fpezzati
  *
  */
-abstract class CsvReader {
+public abstract class CsvReader {
 
 	public void read(String csvsnippet) throws CsvException {
 		if (csvsnippet == null || csvsnippet.isEmpty())

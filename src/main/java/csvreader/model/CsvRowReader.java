@@ -6,13 +6,13 @@ import java.util.List;
 import csvreader.exception.CsvException;
 import csvreader.exception.CsvFormatException;
 
-class CsvRowReader extends CsvReader {
+public class CsvRowReader extends CsvReader {
 
 	private List<CsvReader> readers;
 	private String separator;
 	private int rowCount;
 	
-	CsvRowReader() {
+	public CsvRowReader() {
 		readers = new ArrayList<>();
 		this.setSeparator(",");
 	}
@@ -47,5 +47,39 @@ class CsvRowReader extends CsvReader {
 
 	public int getRowCount() {
 		return rowCount;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((readers == null) ? 0 : readers.hashCode());
+		result = prime * result + rowCount;
+		result = prime * result + ((separator == null) ? 0 : separator.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CsvRowReader other = (CsvRowReader) obj;
+		if (readers == null) {
+			if (other.readers != null)
+				return false;
+		} else if (!readers.equals(other.readers))
+			return false;
+		if (rowCount != other.rowCount)
+			return false;
+		if (separator == null) {
+			if (other.separator != null)
+				return false;
+		} else if (!separator.equals(other.separator))
+			return false;
+		return true;
 	}
 }
