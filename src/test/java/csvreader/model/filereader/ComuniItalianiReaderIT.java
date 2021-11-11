@@ -1,16 +1,17 @@
 package csvreader.model.filereader;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
+import java.util.Map;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
-import csvreader.model.CsvRowReader;
-import csvreader.model.CsvStringReader;
+import csvreader.exception.CsvException;
 
 class ComuniItalianiReaderIT {
 	
@@ -18,39 +19,58 @@ class ComuniItalianiReaderIT {
 
 	@BeforeEach
 	void initEach() {
-		sut = Mockito.spy(new ComuniItalianiReader());
+		sut = new ComuniItalianiReader();
 	}
 	
-	/**
-	 * sut comes with an empty code:name map.
-	 */
 	@Test
-	void sutComesWithAnEmptyCodeMap() {
+	void sutReadUnexistingFile() throws Exception {
+		Assertions.assertThrows(IOException.class, ()->{
+			sut.readFile(new File("src/test/resources/input/nonexistingfile.csv").toURI());
+		});
+	}
+	
+	@Test
+	void sutReadAnEmptyFile() throws Exception {
+		sut.readFile(new File("src/test/resources/input/empty_file.csv").toURI());
 		MatcherAssert.assertThat(sut.getCodeMap(), Matchers.is(Matchers.anEmptyMap()));
 	}
 	
 	@Test
-	void sutComesWithFourStringReadersRowReader() {
-		MatcherAssert.assertThat(sut.getCsvReader(), Matchers.is(getAFourCsvReadersRow()));
-	}
-
-	private CsvRowReader getAFourCsvReadersRow() {
-		CsvRowReader rowReader = new CsvRowReader();
-		rowReader.getReaders().add(new CsvStringReader());
-		rowReader.getReaders().add(new CsvStringReader());
-		rowReader.getReaders().add(new CsvStringReader());
-		rowReader.getReaders().add(new CsvStringReader());
-		return rowReader;
-	}
-
-	/**
-	 * when inputstream is null sut raises a NPE.
-	 */
-	@Test
-	void sutDoesNothingWhenGivenURIIsNull() {
-		URI input = null;
-		Assertions.assertThrows(NullPointerException.class, ()->{
-			sut.readFile(input);
+	void sutReadAWrongFormattedFile() {
+		URI uri = new File("src/test/resources/input/wrong_file.csv").toURI();
+		Assertions.assertThrows(CsvException.class, ()->{
+			sut.readFile(uri);
 		});
+	}
+	
+	@Test
+	void sutReadAFewRowsFile() throws Exception {
+		sut.readFile(new File("src/test/resources/input/few_rows_file.csv").toURI());
+		sutReadsFewRowsFileCorrectly(sut.getCodeMap());
+	}
+	
+	private void sutReadsFewRowsFileCorrectly(Map<String, String> codeMap) {
+		MatcherAssert.assertThat(codeMap.get("Codice"), Matchers.is("Denominazione"));
+		MatcherAssert.assertThat(codeMap.get("A074"), Matchers.is("Agli�"));
+		MatcherAssert.assertThat(codeMap.get("A109"), Matchers.is("Airasca"));
+		MatcherAssert.assertThat(codeMap.get("A117"), Matchers.is("Ala di Stura"));
+		MatcherAssert.assertThat(codeMap.get("A157"), Matchers.is("Albiano d'Ivrea"));
+		MatcherAssert.assertThat(codeMap.get("A218"), Matchers.is("Almese"));
+	}
+
+	@Test
+	void sutReadComuniItalianiFile() throws Exception {
+		sut.readFile(new File("src/test/resources/input/comuni_italiani.csv").toURI());
+		sutReadsComuniItalianiFileCorrectly(sut.getCodeMap());
+	}
+	
+	private void sutReadsComuniItalianiFileCorrectly(Map<String, String> codeMap) {
+		MatcherAssert.assertThat(codeMap.get("Codice"), Matchers.is("Denominazione"));
+		MatcherAssert.assertThat(codeMap.get("A074"), Matchers.is("Agli�"));
+		MatcherAssert.assertThat(codeMap.get("C992"), Matchers.is("Cordignano"));
+		MatcherAssert.assertThat(codeMap.get("D030"), Matchers.is("Cornuda"));
+		MatcherAssert.assertThat(codeMap.get("C670"), Matchers.is("Crocetta del Montello"));
+		MatcherAssert.assertThat(codeMap.get("M025"), Matchers.is("Villasor"));
+		MatcherAssert.assertThat(codeMap.get("M026"), Matchers.is("Villaspeciosa"));
 	}
 }

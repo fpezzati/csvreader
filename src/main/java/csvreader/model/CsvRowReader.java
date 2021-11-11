@@ -21,7 +21,7 @@ public class CsvRowReader extends CsvReader {
 	protected void setValue(String anyString) throws CsvException {
 		rowCount = getRowCount() + 1;
 		String[] snippets = anyString.split(getSeparator());
-		if(snippets.length > readers.size()) throw new CsvFormatException("too many columns in row.");
+		if(snippets.length != readers.size()) throw new CsvFormatException("unexpected number of columns in row.");
 		for(int i=0; i<snippets.length; i++) {
 			readers.get(i).read(snippets[i]);
 		}

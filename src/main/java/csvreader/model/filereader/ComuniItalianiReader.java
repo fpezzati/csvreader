@@ -39,6 +39,7 @@ public class ComuniItalianiReader {
 		try(BufferedReader reader = new BufferedReader(new FileReader(new File(input)))) {
 			for(String line; (line = reader.readLine()) != null; ) {
 				getCsvReader().read(line);
+				codeMap.put(rowReader.getReaders().get(0).getValue(), rowReader.getReaders().get(1).getValue());
 			}
 		}
 	}
