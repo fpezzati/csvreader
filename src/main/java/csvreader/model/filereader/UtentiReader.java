@@ -7,13 +7,14 @@ import java.io.IOException;
 import java.net.URI;
 
 import csvreader.exception.CsvException;
-import csvreader.model.Collector;
 import csvreader.model.ComuneCodeReader;
 import csvreader.model.CsvReader;
 import csvreader.model.CsvRowReader;
 import csvreader.model.DateReader;
 import csvreader.model.SexReader;
 import csvreader.model.UserIdReader;
+import csvreader.model.collector.Collector;
+import csvreader.model.collector.DoNothing;
 
 public class UtentiReader extends CsvFileReader {
 

@@ -40,4 +40,15 @@ public class CsvStringReader extends CsvReader {
 			return false;
 		return true;
 	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		CsvStringReader csr = new CsvStringReader();
+		try {
+			csr.setValue(getValue());
+		} catch (CsvException e) {
+			new RuntimeException(e);
+		}
+		return csr;
+	}
 }

@@ -20,4 +20,14 @@ public class ComuneCodeReader extends CsvReader {
 		return value;
 	}
 
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		ComuneCodeReader ccr = new ComuneCodeReader();
+		try {
+			ccr.setValue(getValue());
+		} catch (CsvException e) {
+			throw new RuntimeException(e);
+		}
+		return ccr;
+	}
 }

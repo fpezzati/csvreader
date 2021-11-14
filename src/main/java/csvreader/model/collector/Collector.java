@@ -1,6 +1,7 @@
-package csvreader.model;
+package csvreader.model.collector;
 
 import csvreader.exception.CsvException;
+import csvreader.model.CsvReader;
 
 /**
  * Collector: pick a {@link CsvReader} and does something with it.

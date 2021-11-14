@@ -6,13 +6,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import csvreader.model.Collector;
 import csvreader.model.ComuneCodeReader;
 import csvreader.model.CsvReader;
 import csvreader.model.CsvRowReader;
 import csvreader.model.DateReader;
 import csvreader.model.SexReader;
 import csvreader.model.UserIdReader;
+import csvreader.model.collector.Collector;
+import csvreader.model.collector.DoNothing;
 
 /**
  * {@link UtentiReader}:<br>

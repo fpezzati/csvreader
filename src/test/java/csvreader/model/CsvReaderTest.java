@@ -1,14 +1,11 @@
 package csvreader.model;
 
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 
 import csvreader.exception.CsvException;
-import csvreader.model.CsvReader;
 
 class CsvReaderTest {
 	
@@ -24,7 +21,11 @@ class CsvReaderTest {
 
 			@Override
 			public Object getValue() {
-				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			protected Object clone() throws CloneNotSupportedException {
 				return null;
 			}});
 	}

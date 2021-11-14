@@ -1,7 +1,6 @@
-package csvreader.model.filereader;
+package csvreader.model.collector;
 
 import csvreader.exception.CsvException;
-import csvreader.model.Collector;
 import csvreader.model.CsvReader;
 
 /**

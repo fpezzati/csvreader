@@ -27,10 +27,21 @@ public class DateReader extends CsvReader {
 	}
 
 	public String getPattern() {
-		return pattern ;
+		return pattern;
 	}
 
 	public void setPattern(String pattern) {
 		this.pattern = pattern;
+	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		DateReader dr = new DateReader();
+		try {
+			dr.value = getValue();
+		} catch (CsvException e) {
+			new RuntimeException(e);
+		}
+		return dr;
 	}
 }
