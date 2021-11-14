@@ -16,7 +16,7 @@ public class ComuneCodeReader extends CsvReader {
 	}
 
 	@Override
-	public String getValue() throws CsvException {
+	public String getValue() {
 		return value;
 	}
 
