@@ -44,10 +44,10 @@ class ComuniItalianiReaderTest {
 	}
 
 	/**
-	 * when inputstream is null sut raises a NPE.
+	 * when source URI is null sut raises a NPE.
 	 */
 	@Test
-	void sutDoesNothingWhenGivenURIIsNull() {
+	void sutRaisesAnNPEWhenGivenURIIsNull() {
 		URI input = null;
 		Assertions.assertThrows(NullPointerException.class, ()->{
 			sut.readFile(input);

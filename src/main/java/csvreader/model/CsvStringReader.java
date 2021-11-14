@@ -1,11 +1,13 @@
 package csvreader.model;
 
+import csvreader.exception.CsvException;
+
 public class CsvStringReader extends CsvReader {
 
 	private String value;
 
 	@Override
-	protected void setValue(String value) {
+	protected void setValue(String value) throws CsvException {
 		this.value = value;
 	}
 

@@ -25,19 +25,19 @@ class ComuniItalianiReaderIT {
 	@Test
 	void sutReadUnexistingFile() throws Exception {
 		Assertions.assertThrows(IOException.class, ()->{
-			sut.readFile(new File("src/test/resources/input/nonexistingfile.csv").toURI());
+			sut.readFile(new File("src/test/resources/comuni/nonexistingfile.csv").toURI());
 		});
 	}
 	
 	@Test
 	void sutReadAnEmptyFile() throws Exception {
-		sut.readFile(new File("src/test/resources/input/empty_file.csv").toURI());
+		sut.readFile(new File("src/test/resources/comuni/empty_file.csv").toURI());
 		MatcherAssert.assertThat(sut.getCodeMap(), Matchers.is(Matchers.anEmptyMap()));
 	}
 	
 	@Test
 	void sutReadAWrongFormattedFile() {
-		URI uri = new File("src/test/resources/input/wrong_file.csv").toURI();
+		URI uri = new File("src/test/resources/comuni/wrong_file.csv").toURI();
 		Assertions.assertThrows(CsvException.class, ()->{
 			sut.readFile(uri);
 		});
@@ -45,7 +45,7 @@ class ComuniItalianiReaderIT {
 	
 	@Test
 	void sutReadAFewRowsFile() throws Exception {
-		sut.readFile(new File("src/test/resources/input/few_rows_file.csv").toURI());
+		sut.readFile(new File("src/test/resources/comuni/few_rows_file.csv").toURI());
 		sutReadsFewRowsFileCorrectly(sut.getCodeMap());
 	}
 	
@@ -60,7 +60,7 @@ class ComuniItalianiReaderIT {
 
 	@Test
 	void sutReadComuniItalianiFile() throws Exception {
-		sut.readFile(new File("src/test/resources/input/comuni_italiani.csv").toURI());
+		sut.readFile(new File("src/test/resources/comuni/comuni_italiani.csv").toURI());
 		sutReadsComuniItalianiFileCorrectly(sut.getCodeMap());
 	}
 	

@@ -18,5 +18,5 @@ public abstract class CsvReader {
 
 	protected abstract void setValue(String anyString) throws CsvException;
 
-	public abstract <T> T getValue();
+	public abstract <T> T getValue() throws CsvException;
 }

@@ -13,7 +13,7 @@ import csvreader.model.CsvReader;
 import csvreader.model.CsvRowReader;
 import csvreader.model.CsvStringReader;
 
-public class ComuniItalianiReader {
+public class ComuniItalianiReader extends CsvFileReader {
 
 	private Map<String, String> codeMap;
 	private CsvRowReader rowReader;
@@ -35,12 +35,9 @@ public class ComuniItalianiReader {
 		return rowReader;
 	}
 
-	public void readFile(URI input) throws IOException, CsvException {
-		try(BufferedReader reader = new BufferedReader(new FileReader(new File(input)))) {
-			for(String line; (line = reader.readLine()) != null; ) {
-				getCsvReader().read(line);
-				codeMap.put(rowReader.getReaders().get(0).getValue(), rowReader.getReaders().get(1).getValue());
-			}
-		}
+	@Override
+	protected void manageTheLine(String line) throws CsvException {
+		getCsvReader().read(line);
+		codeMap.put(rowReader.getReaders().get(0).getValue(), rowReader.getReaders().get(1).getValue());
 	}
 }
