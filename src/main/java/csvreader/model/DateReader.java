@@ -35,7 +35,7 @@ public class DateReader extends CsvReader {
 	}
 
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
+	public Object clone() throws CloneNotSupportedException {
 		DateReader dr = new DateReader();
 		dr.value = getValue();
 		return dr;

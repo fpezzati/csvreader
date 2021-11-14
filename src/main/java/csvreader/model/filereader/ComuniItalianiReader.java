@@ -10,11 +10,11 @@ import csvreader.model.CsvStringReader;
 
 public class ComuniItalianiReader extends CsvFileReader {
 
-	private Map<String, String> codeMap;
+	private Map<String, CsvRowReader> codeMap;
 	private CsvRowReader rowReader;
 	
 	public ComuniItalianiReader() {
-		codeMap = new HashMap<String, String>();
+		codeMap = new HashMap<String, CsvRowReader>();
 		rowReader = new CsvRowReader();
 		rowReader.getReaders().add(new CsvStringReader());
 		rowReader.getReaders().add(new CsvStringReader());
@@ -22,7 +22,7 @@ public class ComuniItalianiReader extends CsvFileReader {
 		rowReader.getReaders().add(new CsvStringReader());
 	}
 
-	public Map<String, String> getCodeMap() {
+	public Map<String, CsvRowReader> getCodeMap() {
 		return codeMap;
 	}
 
@@ -33,6 +33,10 @@ public class ComuniItalianiReader extends CsvFileReader {
 	@Override
 	protected void manageTheLine(String line) throws CsvException {
 		getCsvReader().read(line);
-		codeMap.put(rowReader.getReaders().get(0).getValue(), rowReader.getReaders().get(1).getValue());
+		try {
+			codeMap.put(rowReader.getReaders().get(0).getValue(), (CsvRowReader) rowReader.clone());
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

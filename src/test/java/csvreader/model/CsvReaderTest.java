@@ -25,7 +25,7 @@ class CsvReaderTest {
 			}
 
 			@Override
-			protected Object clone() throws CloneNotSupportedException {
+			public Object clone() throws CloneNotSupportedException {
 				return null;
 			}});
 	}

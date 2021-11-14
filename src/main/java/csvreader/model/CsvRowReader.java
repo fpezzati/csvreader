@@ -84,7 +84,7 @@ public class CsvRowReader extends CsvReader {
 	}
 	
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
+	public Object clone() throws CloneNotSupportedException {
 		CsvRowReader crr = new CsvRowReader();
 		for(CsvReader reader : getReaders()) {
 			crr.getReaders().add((CsvReader) reader.clone());

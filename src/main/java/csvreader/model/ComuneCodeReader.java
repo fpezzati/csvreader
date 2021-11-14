@@ -21,7 +21,7 @@ public class ComuneCodeReader extends CsvReader {
 	}
 
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
+	public Object clone() throws CloneNotSupportedException {
 		ComuneCodeReader ccr = new ComuneCodeReader();
 		try {
 			ccr.setValue(getValue());

@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import csvreader.exception.CsvException;
+import csvreader.model.CsvReader;
+import csvreader.model.CsvRowReader;
 
 class ComuniItalianiReaderIT {
 	
@@ -49,13 +51,13 @@ class ComuniItalianiReaderIT {
 		sutReadsFewRowsFileCorrectly(sut.getCodeMap());
 	}
 	
-	private void sutReadsFewRowsFileCorrectly(Map<String, String> codeMap) {
-		MatcherAssert.assertThat(codeMap.get("Codice"), Matchers.is("Denominazione"));
-		MatcherAssert.assertThat(codeMap.get("A074"), Matchers.is("Agli�"));
-		MatcherAssert.assertThat(codeMap.get("A109"), Matchers.is("Airasca"));
-		MatcherAssert.assertThat(codeMap.get("A117"), Matchers.is("Ala di Stura"));
-		MatcherAssert.assertThat(codeMap.get("A157"), Matchers.is("Albiano d'Ivrea"));
-		MatcherAssert.assertThat(codeMap.get("A218"), Matchers.is("Almese"));
+	private void sutReadsFewRowsFileCorrectly(Map<String, CsvRowReader> codeMap) {
+		MatcherAssert.assertThat(codeMap.get("Codice").getReaders().get(1).getValue(), Matchers.is("Denominazione"));
+		MatcherAssert.assertThat(codeMap.get("A074").getReaders().get(1).getValue(), Matchers.is("Agli�"));
+		MatcherAssert.assertThat(codeMap.get("A109").getReaders().get(1).getValue(), Matchers.is("Airasca"));
+		MatcherAssert.assertThat(codeMap.get("A117").getReaders().get(1).getValue(), Matchers.is("Ala di Stura"));
+		MatcherAssert.assertThat(codeMap.get("A157").getReaders().get(1).getValue(), Matchers.is("Albiano d'Ivrea"));
+		MatcherAssert.assertThat(codeMap.get("A218").getReaders().get(1).getValue(), Matchers.is("Almese"));
 	}
 
 	@Test
@@ -64,13 +66,13 @@ class ComuniItalianiReaderIT {
 		sutReadsComuniItalianiFileCorrectly(sut.getCodeMap());
 	}
 	
-	private void sutReadsComuniItalianiFileCorrectly(Map<String, String> codeMap) {
-		MatcherAssert.assertThat(codeMap.get("Codice"), Matchers.is("Denominazione"));
-		MatcherAssert.assertThat(codeMap.get("A074"), Matchers.is("Agli�"));
-		MatcherAssert.assertThat(codeMap.get("C992"), Matchers.is("Cordignano"));
-		MatcherAssert.assertThat(codeMap.get("D030"), Matchers.is("Cornuda"));
-		MatcherAssert.assertThat(codeMap.get("C670"), Matchers.is("Crocetta del Montello"));
-		MatcherAssert.assertThat(codeMap.get("M025"), Matchers.is("Villasor"));
-		MatcherAssert.assertThat(codeMap.get("M026"), Matchers.is("Villaspeciosa"));
+	private void sutReadsComuniItalianiFileCorrectly(Map<String, CsvRowReader> codeMap) {
+		MatcherAssert.assertThat(codeMap.get("Codice").getReaders().get(1).getValue(), Matchers.is("Denominazione"));
+		MatcherAssert.assertThat(codeMap.get("A074").getReaders().get(1).getValue(), Matchers.is("Agli�"));
+		MatcherAssert.assertThat(codeMap.get("C992").getReaders().get(1).getValue(), Matchers.is("Cordignano"));
+		MatcherAssert.assertThat(codeMap.get("D030").getReaders().get(1).getValue(), Matchers.is("Cornuda"));
+		MatcherAssert.assertThat(codeMap.get("C670").getReaders().get(1).getValue(), Matchers.is("Crocetta del Montello"));
+		MatcherAssert.assertThat(codeMap.get("M025").getReaders().get(1).getValue(), Matchers.is("Villasor"));
+		MatcherAssert.assertThat(codeMap.get("M026").getReaders().get(1).getValue(), Matchers.is("Villaspeciosa"));
 	}
 }

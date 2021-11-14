@@ -42,7 +42,7 @@ public class CsvStringReader extends CsvReader {
 	}
 
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
+	public Object clone() throws CloneNotSupportedException {
 		CsvStringReader csr = new CsvStringReader();
 		try {
 			csr.setValue(getValue());

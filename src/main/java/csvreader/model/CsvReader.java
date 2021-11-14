@@ -21,5 +21,5 @@ public abstract class CsvReader implements Cloneable {
 
 	public abstract <T> T getValue();
 
-	protected abstract Object clone() throws CloneNotSupportedException;
+	public abstract Object clone() throws CloneNotSupportedException;
 }
