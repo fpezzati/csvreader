@@ -20,8 +20,16 @@ Definizione delle api rest:
 | GET | /regione/?provincia=FI&offset=0&limit=10 | | |
 
 ## TODO
-File Readers are ok. What is missing now is a couple of Collectors: one to build the code map and one to build statistic doc.
+ComuniItalianiReader is quite ok. Some doubt about how other components benefit from what he read. 
 
-Once both Collectors are finished, I have to develop a writer to produce the required .csv.
+UtentiReader has a complete read feature. What is missing now is how to get a codemap from ComunitItalianiReader and use to produce a statistic report.
+
+Maybe an interface managing two parameters, <I>, <O>?
+
+ComuniItalianiReader pick a <I> with a file name and put codemap in <O>.
+
+UtentiReader pick a <I> with a codemap and a file name. Codemap was filed in by ComuniItalianiReader in the previous step.
+
+There could be a third component that is in charge to pick statisticalmap UtentiReader provided and write it down in a file.
 
 Oh, this is a reminder: look at https://editor.swagger.io/ to generate an API description instead using tables in md.
