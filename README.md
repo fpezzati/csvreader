@@ -1,10 +1,13 @@
 # CsvReader
+Readers define format of .csv file: you have a row reader, composed by at least one reader. Row reader split .csv row, each reader read its string snippet. 
+
+Flow is organized in tasks. Each task allows an input and an output. Task order is crucial, task's output may become input for the next one.
 
 ## Esercizio 1
-Svolto parzialmente nel progetto.
+Left uncompleted, see the todo below.
 
 ## Esercizio 2
-Definizione delle api rest:
+rest apis trivial schema:
 
 | metodo | url | mime payload | esempio payload |
 |:------:|:----|:-------------|:----------------|
@@ -20,16 +23,8 @@ Definizione delle api rest:
 | GET | /regione/?provincia=FI&offset=0&limit=10 | | |
 
 ## TODO
-ComuniItalianiReader is quite ok. Some doubt about how other components benefit from what he read. 
+Fix `UtentiReaderIT`, a couple of tests broke because of object equality.
 
-UtentiReader has a complete read feature. What is missing now is how to get a codemap from ComunitItalianiReader and use to produce a statistic report.
+Write the 'writer' component that will pick `UtentiReader` output and put into a .csv file.
 
-Maybe an interface managing two parameters, <I>, <O>?
-
-ComuniItalianiReader pick a <I> with a file name and put codemap in <O>.
-
-UtentiReader pick a <I> with a codemap and a file name. Codemap was filed in by ComuniItalianiReader in the previous step.
-
-There could be a third component that is in charge to pick statisticalmap UtentiReader provided and write it down in a file.
-
-Oh, this is a reminder: look at https://editor.swagger.io/ to generate an API description instead using tables in md.
+Generate an API description using openapi3 instead using tables in md.
