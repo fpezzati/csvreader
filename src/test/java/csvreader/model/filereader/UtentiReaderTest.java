@@ -4,7 +4,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import csvreader.model.ComuneCodeReader;
 import csvreader.model.CsvReader;
@@ -12,14 +11,14 @@ import csvreader.model.CsvRowReader;
 import csvreader.model.DateReader;
 import csvreader.model.SexReader;
 import csvreader.model.UserIdReader;
-import csvreader.model.collector.Collector;
-import csvreader.model.collector.DoNothing;
+import csvreader.task.CsvTaskExecutor;
+import csvreader.task.DoNothing;
 
 /**
  * {@link UtentiReader}:<br>
  * - picks a csv resource made by four columns,
  * - has a default {@link DoNothing} collector,
- * - read rows if any and move them to his rowreader. Then rowreader is moved to {@link Collector},
+ * - read rows if any and move them to his rowreader. Then rowreader is moved to {@link CsvTaskExecutor},
  * 
  * @author fpezzati
  *
@@ -52,23 +51,5 @@ class UtentiReaderTest {
 		MatcherAssert.assertThat(rowReader.getReaders().get(1), Matchers.is(Matchers.instanceOf(SexReader.class)));
 		MatcherAssert.assertThat(rowReader.getReaders().get(2), Matchers.is(Matchers.instanceOf(DateReader.class)));
 		MatcherAssert.assertThat(rowReader.getReaders().get(3), Matchers.is(Matchers.instanceOf(ComuneCodeReader.class)));
-	}
-
-	/**
-	 * sut has a {@link DoNothing} object by default.
-	 */
-	@Test
-	void sutHasADefaultBehaviorCollector() {
-		MatcherAssert.assertThat(sut.getCollector(), Matchers.is(Matchers.instanceOf(DoNothing.class)));
-	}
-	
-	/**
-	 * sut can encapsulate a {@link Collector} object
-	 */
-	@Test
-	void sutCanGetACollector() {
-		Collector collector = Mockito.mock(Collector.class);
-		sut.setCollector(collector);
-		MatcherAssert.assertThat(sut.getCollector(), Matchers.is(collector));
 	}
 }

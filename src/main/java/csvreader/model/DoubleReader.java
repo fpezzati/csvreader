@@ -3,32 +3,29 @@ package csvreader.model;
 import csvreader.exception.CsvException;
 import csvreader.exception.CsvFormatException;
 
-public class ComuneCodeReader extends CsvReader {
+public class DoubleReader extends CsvReader {
 
-	private String value;
+	private Double value;
 
 	@Override
-	public void setValue(String code) throws CsvException {
-		if(!code.matches("[A-Z]\\d{3}")) {
-			throw new CsvFormatException(String.format("%s is not a valid comune code.", code));
+	protected void setValue(String anyString) throws CsvException {
+		try {
+			value = Double.parseDouble(anyString);
+		} catch (NumberFormatException e) {
+			throw new CsvFormatException(e);
 		}
-		value = code;
 	}
 
 	@Override
-	public String getValue() {
+	public Double getValue() {
 		return value;
 	}
-	
+
 	@Override
 	public Object clone() throws CloneNotSupportedException {
-		ComuneCodeReader ccr = new ComuneCodeReader();
-		try {
-			ccr.setValue(getValue());
-		} catch (CsvException e) {
-			throw new RuntimeException(e);
-		}
-		return ccr;
+		DoubleReader dr = new DoubleReader();
+		dr.value = getValue();
+		return dr;
 	}
 
 	@Override
@@ -47,7 +44,7 @@ public class ComuneCodeReader extends CsvReader {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ComuneCodeReader other = (ComuneCodeReader) obj;
+		DoubleReader other = (DoubleReader) obj;
 		if (value == null) {
 			if (other.value != null)
 				return false;

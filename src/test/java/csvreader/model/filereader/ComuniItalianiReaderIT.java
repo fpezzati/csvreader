@@ -12,7 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import csvreader.exception.CsvException;
-import csvreader.model.CsvReader;
 import csvreader.model.CsvRowReader;
 
 class ComuniItalianiReaderIT {

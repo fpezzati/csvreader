@@ -7,8 +7,11 @@ import csvreader.exception.CsvException;
 import csvreader.model.CsvReader;
 import csvreader.model.CsvRowReader;
 import csvreader.model.CsvStringReader;
+import csvreader.task.ComuniItalianiInput;
+import csvreader.task.ComuniItalianiOutput;
+import csvreader.task.CsvTaskExecutor;
 
-public class ComuniItalianiReader extends CsvFileReader {
+public class ComuniItalianiReader extends CsvFileReader  implements CsvTaskExecutor<ComuniItalianiInput, ComuniItalianiOutput> {
 
 	private Map<String, CsvRowReader> codeMap;
 	private CsvRowReader rowReader;
@@ -38,5 +41,11 @@ public class ComuniItalianiReader extends CsvFileReader {
 		} catch (CloneNotSupportedException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public void execute(ComuniItalianiInput input, ComuniItalianiOutput output) throws Exception {
+		readFile(input.getURI());
+		output.setCodeMap(getCodeMap());
 	}
 }

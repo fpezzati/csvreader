@@ -20,6 +20,6 @@ public abstract class CsvReader implements Cloneable {
 	protected abstract void setValue(String anyString) throws CsvException;
 
 	public abstract <T> T getValue();
-
+	
 	public abstract Object clone() throws CloneNotSupportedException;
 }
